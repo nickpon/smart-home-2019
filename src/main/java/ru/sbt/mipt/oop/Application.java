@@ -6,45 +6,41 @@ import java.util.Collection;
 
 public class Application {
 
-    private static SmartHomeApplication smartHomeApplication = new ToFileSmartHome();
+    private static SmartHomeLoader smartHomeLoader = new ToFileSmartHome();
 
     public static void main(String... args) throws IOException {
-        SmartHome smartHome = smartHomeApplication.loadSmartHome();
+        SmartHome smartHome = smartHomeLoader.loadSmartHome();
 
         goThroughLoops(smartHome);
     }
 
     private static void goThroughLoops(SmartHome smartHome) {
         SensorEvent nextEvent = RandomSensorEventProvider.getNextEvent();
-        Collection<EventAggregator> eventAggregators = configureEventProcessors();
-        makeLoops(nextEvent, eventAggregators, smartHome);
-    }
+        Collection<EventProcessor> eventProcessors = configureEventProcessors();
 
-    private static void makeLoops (SensorEvent nextEvent, Collection<EventAggregator> eventAggregators,
-                                   SmartHome smartHome) {
         while (nextEvent != null) {
             System.out.println("Event: " + nextEvent);
-            for (EventAggregator eventAggregator : eventAggregators) {
-                eventAggregator.processEvent(smartHome, nextEvent);
+            for (EventProcessor eventProcessor : eventProcessors) {
+                eventProcessor.processEvent(smartHome, nextEvent);
             }
             nextEvent = RandomSensorEventProvider.getNextEvent();
         }
     }
 
-    public static void setSmartHomeApplication(SmartHomeApplication smartHomeApplication) {
-        Application.smartHomeApplication = smartHomeApplication;
+    public static void setSmartHomeLoader(SmartHomeLoader smartHomeLoader) {
+        Application.smartHomeLoader = smartHomeLoader;
     }
 
-    private static Collection<EventAggregator> configureEventProcessors() {
-        Collection<EventAggregator> eventAggregators = new ArrayList<>();
-        modifyAggregators(eventAggregators);
-        return eventAggregators;
+    private static Collection<EventProcessor> configureEventProcessors() {
+        Collection<EventProcessor> eventProcessors = new ArrayList<>();
+        modifyAggregators(eventProcessors);
+        return eventProcessors;
     }
 
-    private static void modifyAggregators(Collection<EventAggregator> eventAggregators) {
-        eventAggregators.add(new LightsEventAggregator());
-        eventAggregators.add(new DoorEventAggregator());
-        eventAggregators.add(new MainDoorEventAggregator());
+    private static void modifyAggregators(Collection<EventProcessor> eventProcessors) {
+        eventProcessors.add(new LightsEventProcessor());
+        eventProcessors.add(new DoorEventProcessor());
+        eventProcessors.add(new MainDoorEventProcessor());
     }
 
 }

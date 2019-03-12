@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ToFileSmartHome implements SmartHomeApplication {
+public class ToFileSmartHome implements SmartHomeLoader {
 
     @Override
     public SmartHome loadSmartHome() throws IOException {
