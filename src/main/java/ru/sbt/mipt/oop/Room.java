@@ -24,4 +24,13 @@ public class Room {
     public String getName() {
         return name;
     }
+
+    public Light getId(String objectId) {
+        for (Light light : lights) {
+            if (light.getId().equals(objectId)) {
+                return light;
+            }
+        }
+        return null;
+    }
 }

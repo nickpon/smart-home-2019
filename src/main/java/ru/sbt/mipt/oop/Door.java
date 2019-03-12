@@ -9,6 +9,10 @@ public class Door {
         this.id = id;
     }
 
+    public boolean getIsOpen() {
+        return isOpen;
+    }
+
     public String getId() {
         return id;
     }
