@@ -24,4 +24,8 @@ public class Room {
     public String getName() {
         return name;
     }
+
+    public Light getId(String objectId) {
+        return null;
+    }
 }
