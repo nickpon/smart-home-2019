@@ -5,27 +5,41 @@ import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 
 public class DoorEventProcessor implements EventProcessor {
 
-    private void changeDoorState(Room room, boolean opened, Door door, String previousState) {
+    private void changeDoorState(boolean opened, Door door, String previousState) {
         door.setOpen(opened);
         System.out.println("The door # " + door.getId());
-        System.out.println("In the room " + room.getName());
         System.out.println(previousState);
     }
 
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isDoorEvent(event)) return;
 
-        for (Room room : smartHome.getRooms()) {
+        /*for (Room room : smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
                 if (door.getId().equals(event.getObjectId())) {
                     if (event.getType() == DOOR_OPEN) {
-                        changeDoorState(room, true, door, "Was opened at that period of time");
+                        changeDoorState(true, door, "Was opened at that period of time");
                     } else {
-                        changeDoorState(room, false, door, "Was closed at that period of time");
+                        changeDoorState(false, door, "Was closed at that period of time");
                     }
                 }
             }
-        }
+        }*/
+
+        smartHome.executeAction(object -> {
+                    if (object instanceof Door) {
+                        Door door = (Door) object;
+                        if (door.getId().equals(event.getObjectId())) {
+                            if (event.getType() == DOOR_OPEN) {
+                                changeDoorState(true, door, "Was opened at that period of time");
+                            } else {
+                                changeDoorState(false, door, "Was closed at that period of time");
+                            }
+                        }
+                    }
+
+                }
+        );
     }
 
     private boolean isDoorEvent(SensorEvent event) {
