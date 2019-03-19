@@ -32,14 +32,6 @@ public class Alarm implements Actionable, Printable {
 
     }
 
-    public void danger() {
-        state = state.danger();
-    }
-
-    public boolean activate(){
-        return state.activated();
-    }
-
     @Override
     public void printToSystemOut() {
         System.out.println("Alarm id: "+ getId());
