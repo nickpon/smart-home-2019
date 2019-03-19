@@ -12,8 +12,14 @@ public class MainDoorEventProcessor implements EventProcessor {
         for (Room mainRoom : smartHome.getRooms()) {
             for (Door mainDoor : mainRoom.getDoors()) {
                 if (mainDoor.getId().equals(event.getObjectId())) {
-                    if (mainRoom.getName().equals("main")) {
-                        smartHome.lightTurnOff();
+                    if (mainRoom.getName().equals("hall")) {
+                        for (Room room : smartHome.getRooms()) {
+                            for (Light light : room.getLights()) {
+                                light.setOn(false);
+                                SensorCommand sensorCommand = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
+                                System.out.println("Sending " + sensorCommand);
+                            }
+                        }
                     }
                 }
             }

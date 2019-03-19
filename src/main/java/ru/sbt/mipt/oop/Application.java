@@ -15,7 +15,8 @@ public class Application {
     }
 
     private static void goThroughLoops(SmartHome smartHome) {
-        SensorEvent nextEvent = RandomSensorEventProvider.getNextEvent();
+        EventGetter RandomSensorEventProvider = new RandomSensorEventProvider();
+        SensorEvent nextEvent = RandomSensorEventProvider.getNextSensorEvent();
         Collection<EventProcessor> eventProcessors = configureEventProcessors();
 
         while (nextEvent != null) {
@@ -23,7 +24,7 @@ public class Application {
             for (EventProcessor eventProcessor : eventProcessors) {
                 eventProcessor.processEvent(smartHome, nextEvent);
             }
-            nextEvent = RandomSensorEventProvider.getNextEvent();
+            nextEvent = RandomSensorEventProvider.getNextSensorEvent();
         }
     }
 

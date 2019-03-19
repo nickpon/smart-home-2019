@@ -6,16 +6,6 @@ import java.util.Collection;
 public class SmartHome implements Actionable{
     Collection<Room> rooms;
 
-    public void lightTurnOff() {
-        for (Room room : getRooms()) {
-            for (Light light : room.getLights()) {
-                light.setOn(false);
-                SensorCommand sensorCommand = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                System.out.println("Sending " + sensorCommand);
-            }
-        }
-    }
-
     public SmartHome() {
         rooms = new ArrayList<>();
     }
@@ -24,12 +14,25 @@ public class SmartHome implements Actionable{
         this.rooms = rooms;
     }
 
+    private Alarm alarm = new Alarm(1234,1234);
+
     public Collection<Room> getRooms() {
         return rooms;
     }
 
     @Override
     public void executeAction(Action action){
+        action.execute(this);
         rooms.forEach(c -> c.executeAction(action));
+    }
+
+    public void setAlarm(Alarm alarm){
+        this.alarm = alarm;
+    }
+    public Alarm getAlarm(){
+        return alarm;
+    }
+    public AlarmState getAlarmState(){
+        return alarm.getState();
     }
 }

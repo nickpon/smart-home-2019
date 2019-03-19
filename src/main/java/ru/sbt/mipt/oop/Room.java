@@ -25,15 +25,6 @@ public class Room implements Actionable {
         return name;
     }
 
-    public Light getId(String objectId) {
-        for (Light light : lights) {
-            if (light.getId().equals(objectId)) {
-                return light;
-            }
-        }
-        return null;
-    }
-
     @Override
     public void executeAction(Action action) {
         action.execute(this);
