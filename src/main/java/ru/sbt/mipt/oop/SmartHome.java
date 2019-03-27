@@ -29,10 +29,4 @@ public class SmartHome implements Actionable{
     public void setAlarm(Alarm alarm){
         this.alarm = alarm;
     }
-    public Alarm getAlarm(){
-        return alarm;
-    }
-    public AlarmState getAlarmState(){
-        return alarm.getState();
-    }
 }
