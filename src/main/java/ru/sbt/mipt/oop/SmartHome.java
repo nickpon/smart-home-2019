@@ -29,4 +29,16 @@ public class SmartHome implements Actionable{
     public void setAlarm(Alarm alarm){
         this.alarm = alarm;
     }
+
+    public void turnAllLightsOnOrOff(boolean lightState){
+        for (Room room: rooms){
+            for (Light light:room.getLights()){
+                light.setOn(lightState);
+            }
+        }
+    }
+
+    public Alarm getAlarm() {
+        return alarm;
+    }
 }

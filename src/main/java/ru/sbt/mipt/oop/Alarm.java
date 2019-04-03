@@ -22,6 +22,11 @@ public class Alarm implements Actionable, Printable {
         return id;
     }
 
+    public void danger() {
+
+        state = state.danger();
+    }
+
     public void activate(int code) {
         state = state.activate(code, password);
 
