@@ -1,5 +1,9 @@
 package ru.sbt.mipt.oop;
 
+import rc.CloseEntranceDoor;
+import rc.RCPanel;
+import rc.RemoteControlRegistry;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +15,17 @@ public class Application {
     public static void main(String... args) throws IOException {
         SmartHome smartHome = smartHomeLoader.loadSmartHome();
 
+        configureRemoteControl(smartHome);
         goThroughLoops(smartHome);
+    }
+
+    private static void configureRemoteControl(SmartHome smartHome) {
+        RCPanel rcPanel = new RCPanel();
+        rcPanel.registerCommand(
+                "A", new CloseEntranceDoor(
+                        new EntranceDoorFinder().findEntranceDoor(smartHome)));
+        RemoteControlRegistry registry = new RemoteControlRegistry();
+        registry.registerRemoteControl(rcPanel, "1");
     }
 
     private static void goThroughLoops(SmartHome smartHome) {
