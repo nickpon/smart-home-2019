@@ -8,7 +8,7 @@ public class RemoteControlRegistry {
      * @param remoteControl
      * @param rcId
      */
-    public void registerRemoteControl(RemoteControl remoteControl) {
+    public void registerRemoteControl(RemoteControl remoteControl, String rcId) {
         // here goes some library code which registers our remote control with given ID (rcId)
         // Well, if I understand it right, there is no need to write smth here?
     }

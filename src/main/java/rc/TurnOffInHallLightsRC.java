@@ -2,7 +2,7 @@ package rc;
 
 import ru.sbt.mipt.oop.*;
 
-public class TurnOffInHallLightsRC implements InterfaceCommand {
+public class TurnOffInHallLightsRC implements Command {
     public SmartHome smartHome;
     public TurnOffInHallLightsRC(SmartHome smartHome){
         this.smartHome = smartHome;

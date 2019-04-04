@@ -1,24 +1,18 @@
 package rc;
 
-import ru.sbt.mipt.oop.Room;
+import ru.sbt.mipt.oop.EntranceDoorFinder;
 import ru.sbt.mipt.oop.Door;
 import ru.sbt.mipt.oop.SmartHome;
 
-public class CloseEntranceDoor implements InterfaceCommand {
-    public SmartHome smartHome;
+public class CloseEntranceDoor implements Command {
+    private final Door entranceDoor;
 
-    public CloseEntranceDoor(SmartHome smartHome){
-        this.smartHome = smartHome;
+    public CloseEntranceDoor(Door entranceDoor){
+        this.entranceDoor = entranceDoor;
     }
 
     @Override
     public void execute() {
-        for (Room room: smartHome.getRooms()){
-            if (room.getName().equals("hall")){
-                for(Door door: room.getDoors()){
-                    door.setOpen(false);
-                }
-            }
-        }
+        entranceDoor.setOpen(false);
     }
 }

@@ -2,17 +2,17 @@ package rc;
 
 import ru.sbt.mipt.oop.*;
 
-public abstract class ActivateAlarmRC implements InterfaceCommand{
-    private SmartHome smartHome;
+public class ActivateAlarmRC implements Command {
+    private Alarm alarm;
     private int password;
 
-    public ActivateAlarmRC(SmartHome smartHome, int password) {
-        this.smartHome = smartHome;
+    public ActivateAlarmRC(Alarm alarm, int password) {
+        this.alarm = alarm;
         this.password = password;
     }
 
     @Override
     public void execute() {
-        smartHome.getAlarm().activate(password);
+        alarm.activate(password);
     }
 }

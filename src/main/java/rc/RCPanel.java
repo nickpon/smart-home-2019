@@ -5,12 +5,12 @@ import java.util.Map;
 
 
 public class RCPanel implements RemoteControl {
-    private Map<String, InterfaceCommand> buttons;
+    private final Map<String, Command> buttons = new HashMap<>();
+
     public RCPanel() {
-        buttons = new HashMap<>();
     }
 
-    public void setingCommand(String buttonCode,  InterfaceCommand command) {
+    public void registerCommand(String buttonCode, Command command) {
         buttons.put(buttonCode,command);
     }
 

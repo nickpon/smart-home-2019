@@ -2,7 +2,7 @@ package rc;
 
 import ru.sbt.mipt.oop.SmartHome;
 
-public class TurnAllLightsOnRC implements InterfaceCommand {
+public class TurnAllLightsOnRC implements Command {
     public SmartHome smartHome;
     public TurnAllLightsOnRC(SmartHome smartHome){
         this.smartHome = smartHome;
@@ -10,6 +10,6 @@ public class TurnAllLightsOnRC implements InterfaceCommand {
 
     @Override
     public void execute() {
-        smartHome.turnAllLightsOnOrOff(true);
+        smartHome.setAllLightsTo(true);
     }
 }
