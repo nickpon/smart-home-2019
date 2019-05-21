@@ -18,7 +18,7 @@ public class LightRCOnTest {
     public void execute() {
         TurnAllLightsOnRC ligthsOnCommand = new TurnAllLightsOnRC(smartHome);
         ligthsOnCommand.execute();
-        Boolean isAllLightsOn = (Boolean) LightHelper.AreAllLightsOff(smartHome);
+        Boolean isAllLightsOn = (Boolean) tests.LightHelper.AreAllLightsOff(smartHome);
         assertEquals(true, isAllLightsOn);
         System.out.println("OK");
     }

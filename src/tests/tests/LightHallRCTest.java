@@ -18,7 +18,7 @@ public class LightHallRCTest {
     public void execute() {
         TurnOffInHallLightsRC ligthsOnCommand = new TurnOffInHallLightsRC(smartHome);
         ligthsOnCommand.execute();
-        LightHelper.AreAllLightsHallOK(smartHome);
+        tests.LightHelper.AreAllLightsHallOK(smartHome);
         System.out.println("OK");
     }
 }
